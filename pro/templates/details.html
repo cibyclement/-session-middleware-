@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row m-5">
+        <div class="col">
+            <a href="/bio_data" class="btn btn-primary">View Bio Data</a><br><br>
+        </div>
+        <div class="col">
+            <a href="/edit_bio_data" class="btn btn-primary">Add Bio Data</a><br><br>
+        </div>
+        <div class="col">
+            <a href="/userdetails" class="btn btn-primary">User Details</a><br><br>
+        </div>
+    </div>
+
+<div class="container"> 
+<h1 class="mt-4">BioData Search</h1>
+<form action="{% url 'details' %}" method="GET" class="mt-3">
+    <div class="input-group mb-3">
+        <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search...">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+</div>
+
+<div class="container">
+    {% if request.GET.q %}
+        <h2 class="mt-4">Search Results:</h2>
+        {% if biodata %}
+            <ul class="list-group">
+                {% for data in biodata %}
+                    <li class="list-group-item">{{ data.name }}, Age: {{ data.age }}, Date of Birth: {{ data.date_of_birth }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="mt-3">No results found.</p>
+        {% endif %}
+    {% endif %}
+</div>
+    
+    
+    
+
+{% endblock %}
